@@ -43,13 +43,6 @@
   }
 }
 
-.masthead__menu-home-item {
-  @include breakpoint($medium) {
-    display: block !important;
-  }
-  display: none !important;
-}
-
 .masthead__menu-item {
   display: block;
   list-style-type: none;
@@ -60,5 +53,4 @@
     font-weight: 700;
   }
 }
-
 

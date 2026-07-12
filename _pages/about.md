@@ -27,7 +27,7 @@ I am a Ph.D. student at the Media Synthesis and Forensics Lab (formerly known as
 # 📝 Publications 
 
 <div class='paper-box'>
-<div class='paper-box-image'><div><div class="badge">arXiv 2026</div><img src='images/publications/AoH.png' alt="Autonomy-of-Heads attention head visualization" width="100%"></div></div>
+<div class='paper-box-image'><div><div class="badge">arXiv 2026</div><img src='images/publications/AoH.svg' alt="Autonomy-of-Heads attention head visualization" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
 **[Autonomy-of-Heads: Data-Free Sparse Attention from Frozen Query-Key Geometry](aRxiv comming soon...)**
@@ -39,21 +39,21 @@ We introduce a data-free hybrid sparse attention method that identifies retrieva
 </div>
 
 <div class='paper-box'>
-<div class='paper-box-image'><div><div class="badge">ACL 2026</div><div class="award-badge">Outstanding Paper Award</div><img src='images/publications/race.png' alt="RACE fine-grained detection architecture" width="100%"></div></div>
+<div class='paper-box-image'><div><div class="badge">ACL 2026</div><div class="award-badge">Outstanding Paper Award</div><img src='images/publications/race.svg' alt="RACE fine-grained detection architecture" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
 **[Beyond the Final Actor: Modeling the Dual Roles of Creator and Editor for Fine-Grained LLM-Generated Text Detection](https://race.yang-li.cn/)**
 
 **Yang Li, Qiang Sheng, Zhengjia Wang, <u>Yehan Yang</u>, Danding Wang, Juan Cao** <br>
 
-*🏆 ACL 2026 Outstanding Paper Award!*
+<span class="award-highlight"><strong>🏆 ACL 2026 Outstanding Paper Award!</strong></span>
 
 RACE distinguishes human text polished by an LLM from LLM-generated text polished by a human through joint modeling of creator logic and editing style at the EDU level.
 </div>
 </div>
 
 <div class='paper-box'>
-<div class='paper-box-image'><div><div class="badge">NeurIPS 2025</div><img src='images/publications/SCM.png' alt="Streaming Content Monitor illustration" width="100%"></div></div>
+<div class='paper-box-image'><div><div class="badge">NeurIPS 2025</div><img src='images/publications/SCM.svg' alt="Streaming Content Monitor illustration" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
 **[From Judgment to Interference: Early Stopping LLM Harmful Outputs via Streaming Content Monitoring](https://streaming-content-monitor.github.io/)**
