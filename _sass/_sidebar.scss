@@ -283,3 +283,59 @@
     display: none;
   }
 }
+
+/*
+   Mobile profile layout
+   Keep the identity row separate from the social links so the avatar has
+   enough room to remain legible on narrow screens.
+   ========================================================================== */
+@media screen and (max-width: 600px) {
+  .profile_box {
+    flex-wrap: wrap;
+    align-items: center;
+    row-gap: 1em;
+  }
+
+  .author__avatar {
+    flex: 0 0 90px;
+    width: 90px;
+    height: 115px;
+
+    .author__avatar-image {
+      width: 90px;
+      height: 115px;
+      border-radius: 50%;
+      object-position: center 35%;
+    }
+  }
+
+  .author__content {
+    flex: 1 1 0;
+    min-width: 0;
+    padding-left: 16px;
+  }
+
+  .author__urls-wrapper {
+    flex: 0 0 100%;
+    width: 100%;
+    margin-left: 0;
+    cursor: default;
+  }
+
+  .author__urls_sm {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.15em;
+    margin-top: 0;
+    padding: 0.45em 0.35em;
+    font-size: 1.6em;
+
+    a {
+      flex: 1 1 0;
+      min-width: 0;
+      padding: 0.2em 0;
+      text-align: center;
+    }
+  }
+}
