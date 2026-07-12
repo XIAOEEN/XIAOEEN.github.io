@@ -8,51 +8,87 @@ redirect_from:
   - /about.html
 ---
 
-{% if site.google_scholar_stats_use_cdn %}
-{% assign gsDataBaseUrl = "https://cdn.jsdelivr.net/gh/" | append: site.repository | append: "@" %}
-{% else %}
-{% assign gsDataBaseUrl = "https://raw.githubusercontent.com/" | append: site.repository | append: "/" %}
-{% endif %}
-{% assign url = gsDataBaseUrl | append: "google-scholar-stats/gs_data_shieldsio.json" %}
-
 <span class='anchor' id='about-me'></span>
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet. Suspendisse condimentum, libero vel tempus mattis, risus risus vulputate libero, elementum fermentum mi neque vel nisl. Maecenas facilisis maximus dignissim. Curabitur mattis vulputate dui, tincidunt varius libero luctus eu. Mauris mauris nulla, scelerisque eget massa id, tincidunt congue felis. Sed convallis tempor ipsum rhoncus viverra. Pellentesque nulla orci, accumsan volutpat fringilla vitae, maximus sit amet tortor. Aliquam ultricies odio ut volutpat scelerisque. Donec nisl nisl, porttitor vitae pharetra quis, fringilla sed mi. Fusce pretium dolor ut aliquam consequat. Cras volutpat, tellus accumsan mattis molestie, nisl lacus tempus massa, nec malesuada tortor leo vel quam. Aliquam vel ex consectetur, vehicula leo nec, efficitur eros. Donec convallis non urna quis feugiat.
+I am a Ph.D. student at the Media Synthesis and Forensics Lab (formerly known as Multimedia Computing Group),[Institute of Computing Technology, Chinese Academy of Sciences (ICT, CAS)](http://www.ict.ac.cn/), advised by Professor [Juan Cao](http://scholar.google.com/citations?user=fSBdNg0AAAAJ) and Associate Professor [Qiang Sheng](https://sheng-qiang.github.io/). Previously, I received my B.S. in E-commerce Engineering and Law from Beijing University of Posts and Telecommunications.
 
-My research interest includes neural machine translation and computer vision. I have published more than 100 papers at the top international AI conferences with total <a href='https://scholar.google.com/citations?user=DhtAFkwAAAAJ'>google scholar citations <strong><span id='total_cit'>260000+</span></strong></a> (You can also use google scholar badge <a href='https://scholar.google.com/citations?user=DhtAFkwAAAAJ'><img src="https://img.shields.io/endpoint?url={{ url | url_encode }}&logo=Google%20Scholar&labelColor=f6f6f6&color=9cf&style=flat&label=citations"></a>).
+> My research interests include LLM-generated text detection, LLM safety, efficient long-context inference, and hybrid sparse attention.
+>
+> Feel free to ask me anything about my works! (Email: yangyehan25z@ict.ac.cn)
 
 
 # 🔥 News
-- *2022.02*: &nbsp;🎉🎉 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet. 
-- *2022.02*: &nbsp;🎉🎉 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet. 
+-  *2026.07*: 🏆 One co-author paper [**Beyond the Final Actor: Modeling the Dual Roles of Creator and Editor for Fine-Grained LLM-Generated Text Detection**](https://race.yang-li.cn/) received an ACL 2026 Outstanding Paper Award and was also selected as an SAC Highlight.
+-  *2026.06*: 🎉 Our new work, **Autonomy-of-Heads: Data-Free Sparse Attention from Frozen Query-Key Geometry**, is now available. Developed in collaboration with Baidu’s ERNIE pre-training team, it is open for the community to explore, try, and use.
+- *2026.03*: **[Beyond the Final Actor](https://aclanthology.org/2026.acl-long.235.pdf)** was accepted to ACL 2026 as an oral presentation and nominated for an award.
+- *2025.09*: One Co-author Paper:[**From Judgment to Interference**](https://scm.yang-li.cn/) was accepted to NeurIPS 2025 as a poster presentation.
+- *2025.06*: 🎉 [**PhantomHunter: Detecting Unseen Privately-Tuned LLM-Generated Text via Family-Aware Learning**](https://github.com/ICTMCG/Phantomhunter) is now available.
 
 # 📝 Publications 
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">CVPR 2016</div><img src='images/500x300.png' alt="sym" width="100%"></div></div>
+<div class='paper-box'>
+<div class='paper-box-image'><div><div class="badge">arXiv 2026</div><img src='images/publications/AoH.png' alt="Autonomy-of-Heads attention head visualization" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
-[Deep Residual Learning for Image Recognition](https://openaccess.thecvf.com/content_cvpr_2016/papers/He_Deep_Residual_Learning_CVPR_2016_paper.pdf)
+**Autonomy-of-Heads: Data-Free Sparse Attention from Frozen Query-Key Geometry**
 
-**Kaiming He**, Xiangyu Zhang, Shaoqing Ren, Jian Sun
+**<u>Yehan Yang</u>, Junyuan Shang, Guanqun Zhao, Dianhai Yu, Shuohuan Wang** <br>
 
-[**Project**](https://scholar.google.com/citations?view_op=view_citation&hl=zh-CN&user=DhtAFkwAAAAJ&citation_for_view=DhtAFkwAAAAJ:ALROH1vI_8AC) <strong><span class='show_paper_citations' data='DhtAFkwAAAAJ:ALROH1vI_8AC'></span></strong>
-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet. 
+We introduce a data-free hybrid sparse attention method that identifies retrieval-oriented and streaming attention heads directly from the spectral geometry of frozen Query-Key projection matrices. At 256K context, the method achieves up to **3.24× Prefill acceleration**, **9.14× Decode acceleration**, and nearly **4× lower KV-cache memory**.
 </div>
 </div>
 
-- [Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet](https://github.com), A, B, C, **CVPR 2020**
+<div class='paper-box'>
+<div class='paper-box-image'><div><div class="badge">ACL 2026</div><img src='images/publications/race.png' alt="RACE fine-grained detection architecture" width="100%"></div></div>
+<div class='paper-box-text' markdown="1">
+
+**[Beyond the Final Actor: Modeling the Dual Roles of Creator and Editor for Fine-Grained LLM-Generated Text Detection](https://race.yang-li.cn/)**
+
+**Yang Li, Qiang Sheng, Zhengjia Wang, <u>Yehan Yang</u>, Danding Wang, Juan Cao** <br>
+
+*🏆 ACL 2026 Outstanding Paper Award!*
+
+RACE distinguishes human text polished by an LLM from LLM-generated text polished by a human through joint modeling of creator logic and editing style at the EDU level.
+</div>
+</div>
+
+<div class='paper-box'>
+<div class='paper-box-image'><div><div class="badge">NeurIPS 2025</div><img src='images/publications/SCM.png' alt="Streaming Content Monitor illustration" width="100%"></div></div>
+<div class='paper-box-text' markdown="1">
+
+**[From Judgment to Interference: Early Stopping LLM Harmful Outputs via Streaming Content Monitoring](https://streaming-content-monitor.github.io/)**
+
+<strong>Yang Li, Qiang Sheng, <u>Yehan Yang</u>, Xueyao Zhang, Juan Cao</strong> <br>
+
+A streaming content monitoring system that reaches full-text-level safety performance after observing an average of only **18% of output tokens**, using the 29K-sample FineHarm dataset.
+</div>
+</div>
+
+- <span class="publication-badge">arXiv 2026</span> [PhantomHunter: Detecting Unseen Privately-Tuned LLM-Generated Text via Family-Aware Learning](https://github.com/ICTMCG/Phantomhunter)<br>
+  <strong><u>Yehan Yang</u><sup>*</sup>, Yuhui Shi<sup>*</sup>, Qiang Sheng, Hao Mi, Beizhe Hu, Chaoxi Xu, and Juan Cao</strong>
+
+- <span class="publication-badge">arXiv 2025</span> [JingFang: A Traditional Chinese Medicine Large Language Model of Expert-Level Medical Diagnosis and Syndrome Differentiation-Based Treatment](https://arxiv.org/abs/2502.04345)<br>
+  <strong><u>Yehan Yang</u><sup>*</sup>, Tianhao Ma<sup>*</sup>, Ruotai Li, Xinhan Zheng, Guodong Shana</strong><br>
+  <small><sup>*</sup> Equal contribution.</small>
 
 # 🎖 Honors and Awards
-- *2021.10* Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet. 
-- *2021.09* Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet. 
+- *2026-07*, ACL 2026 Outstanding Paper Award, Association for Computational Linguistics.
+- *2025-09*, HICOOL Youth Entrepreneurship Dream Plan, **Dream Supernova Award**.
+- 9th China International College Students' "Internet+" Innovation and Entrepreneurship Competition, **National Gold Award**.
+- National Computer Design Competition for College Students, **National Bronze Award**.
+- Capital College Students' Challenge Cup, **Beijing Special Prize**.
+- Beijing-Taiwan Student Innovation and Entrepreneurship Competition, **Outstanding Project** at the finals.
 
 # 📖 Educations
-- *2019.06 - 2022.04 (now)*, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet. 
-- *2015.09 - 2019.06*, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet. 
+- *2025.09 - present*, **Ph.D. in Computer Science**, Institute of Computing Technology, Chinese Academy of Sciences.
+- *2021.09 - 2025.06*, **B.S. in E-commerce Engineering and Law**, Beijing University of Posts and Telecommunications.
 
-# 💬 Invited Talks
-- *2021.06*, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet. 
-- *2021.03*, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet.  \| [\[video\]](https://github.com/)
+# 📚 Academic Services
+- <span class="service-badge">Reviewer</span>
+  - ACL Rolling Review (Jul. 2026)
+  - Association for the Advancement of Artificial Intelligence (AAAI) Reviewer (2026)
 
-# 💻 Internships
-- *2019.05 - 2020.02*, [Lorem](https://github.com/), China.
+# 💼 Experience
+- *2026.03 - 07*, **Baidu ERNIE Pre-training Team** — Intern. Working on efficient architectures for next-generation long-context reasoning models.
+- *2024.04 - 2024.06*, **Microsoft STAC Innovation Program** — Intern. Explored SLM-for-RAG and graph retrieval pre-classification, and developed the Javis-AI assistant workflow for voice-based task planning and reminder emails.
+<!-- - *2023.05 - 2024.01*, **Neurotransmitter — Small-Molecule AI Pharmaceutical Expert** — Project lead. Built a formula-herb-target knowledge graph from open databases and trained a therapeutic-effect prediction model with DGL-KE, Transformer, and MLP components. -->

@@ -55,10 +55,19 @@
         display: flex;
         width: 100%;
         order: 2;
+        > div {
+            position: relative;
+            width: 100%;
+        }
         img {
+            display: block;
+            width: 100%;
             max-width: 400px;
+            aspect-ratio: 16 / 9;
             box-shadow: 3px 3px 6px #888;
-            object-fit: cover;
+            object-fit: contain;
+            object-position: center;
+            background: #f8fafc;
         }
     }
     
@@ -106,4 +115,30 @@ h1:before, .anchor:before {
     color: white;
     background-color: #00369f;
     font-size: .8em;
+}
+
+.publication-badge {
+    display: inline-block;
+    margin-right: .35em;
+    padding: .15em .6em;
+    color: #fff;
+    background-color: #1f5fbf;
+    border-radius: .35em;
+    font-family: $monospace;
+    font-size: .85em;
+    font-weight: 700;
+    line-height: 1.2;
+    vertical-align: baseline;
+}
+
+.service-badge {
+    display: inline-block;
+    margin-bottom: .35em;
+    padding: .15em .6em;
+    color: #687386;
+    background-color: #f1f2f4;
+    border-radius: .35em;
+    font-size: .95em;
+    font-weight: 700;
+    line-height: 1.25;
 }

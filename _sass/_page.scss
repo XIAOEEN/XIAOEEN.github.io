@@ -18,8 +18,9 @@
 
 .page {
   @include breakpoint($large) {
+    // Use the full remaining grid after the two-column sidebar.
     @include span(10 of 12 last);
-    @include prefix(0.5 of 12);
+    @include prefix(0 of 12);
     @include suffix(0 of 12);
   }
 
@@ -49,6 +50,8 @@
 }
 
 .page__content {
+  overflow-wrap: anywhere;
+
   #about-me{
     margin-top: -10em;
       &:before { 
@@ -93,6 +96,13 @@
         box-shadow: 0 0 10px rgba(#000, 0.25);
       }
     }
+  }
+
+  blockquote {
+    margin: 1.5em 0;
+    border-left: .3em solid #1f5fbf;
+    font-size: 1.08em;
+    line-height: 1.55;
   }
 
   dt {
