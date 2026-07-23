@@ -27,7 +27,7 @@ I am a Ph.D. student at the Media Synthesis and Forensics Lab (formerly known as
 # 📝 Publications 
 
 <div class='paper-box'>
-<div class='paper-box-image'><div><div class="badge">arXiv 2026</div><img src='images/publications/AoH.svg' alt="Autonomy-of-Heads attention head visualization" width="100%"></div></div>
+<div class='paper-box-image'><div><div class="badge">arXiv 2026</div><img src="{{ '/images/publications/AoH.svg' | relative_url }}" alt="Autonomy-of-Heads attention head visualization" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
 **[Autonomy-of-Heads: Data-Free Sparse Attention from Frozen Query-Key Geometry](aRxiv comming soon...)**
@@ -39,7 +39,7 @@ We introduce a data-free hybrid sparse attention method that identifies retrieva
 </div>
 
 <div class='paper-box'>
-<div class='paper-box-image'><div><div class="badge">ACL 2026</div><div class="award-badge">Outstanding Paper Award</div><img src='images/publications/race.svg' alt="RACE fine-grained detection architecture" width="100%"></div></div>
+<div class='paper-box-image'><div><div class="badge">ACL 2026</div><div class="award-badge">Outstanding Paper Award</div><img src="{{ '/images/publications/race.svg' | relative_url }}" alt="RACE fine-grained detection architecture" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
 **[Beyond the Final Actor: Modeling the Dual Roles of Creator and Editor for Fine-Grained LLM-Generated Text Detection](https://race.yang-li.cn/)**
@@ -53,7 +53,7 @@ RACE distinguishes human text polished by an LLM from LLM-generated text polishe
 </div>
 
 <div class='paper-box'>
-<div class='paper-box-image'><div><div class="badge">NeurIPS 2025</div><img src='images/publications/SCM.svg' alt="Streaming Content Monitor illustration" width="100%"></div></div>
+<div class='paper-box-image'><div><div class="badge">NeurIPS 2025</div><img src="{{ '/images/publications/SCM.svg' | relative_url }}" alt="Streaming Content Monitor illustration" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
 **[From Judgment to Interference: Early Stopping LLM Harmful Outputs via Streaming Content Monitoring](https://streaming-content-monitor.github.io/)**
@@ -89,6 +89,6 @@ A streaming content monitoring system that reaches full-text-level safety perfor
   - Association for the Advancement of Artificial Intelligence (AAAI) Reviewer (2026)
 
 # 💼 Experience
-- *2026.03 - 07*, **Baidu ERNIE Pre-training Team** — Intern. Working on efficient architectures for next-generation long-context reasoning models.
+- *2026.03 - 07*, **Baidu ERNIE Pre-training Team** — Intern. Researching efficient architectures for next-generation long-context reasoning models under the mentorship of [Junyuan Shang](https://x.com/junyuan_shang).
 - *2024.04 - 2024.06*, **Microsoft STAC Innovation Program** — Intern. Explored SLM-for-RAG and graph retrieval pre-classification, and developed the Javis-AI assistant workflow for voice-based task planning and reminder emails.
-<!-- - *2023.05 - 2024.01*, **Neurotransmitter — Small-Molecule AI Pharmaceutical Expert** — Project lead. Built a formula-herb-target knowledge graph from open databases and trained a therapeutic-effect prediction model with DGL-KE, Transformer, and MLP components. -->
+- *2023.05*, **AnglePro Tech** — Project Lead. Built a corpus from 700+ classical Chinese medicine books and 80,000 prescriptions; developed [HeBERTa](https://huggingface.co/collections/XiaoEnn/jingfang-herbal-pretrain-model-family), a RoBERTa-based foundation model pretrained on this corpus; and further fine-tuned it into [JingFang Syndrome Differentiation models](https://huggingface.co/collections/XiaoEnn/jingfang-syndrome-differentiation-models).
