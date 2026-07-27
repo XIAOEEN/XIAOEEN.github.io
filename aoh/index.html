@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="title"
+      content="Autonomy-of-Heads: Data-Free Sparse Attention from Frozen Query-Key Geometry"
+    />
+    <meta
+      name="description"
+      content="AoH identifies retrieval and streaming heads from frozen query-key geometry and enables data-free sparse attention for long-context inference."
+    />
+    <meta
+      name="keywords"
+      content="Autonomy-of-Heads, sparse attention, long-context inference, KV cache, effective rank, query-key geometry"
+    />
+    <meta name="author" content="Yehan Yang, Junyuan Shang, Yang Li, Guanqun Zhao, Shuohuan Wang, Dianhai Yu" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="AoH Project" />
+    <meta
+      property="og:title"
+      content="Autonomy-of-Heads: Data-Free Sparse Attention from Frozen Query-Key Geometry"
+    />
+    <meta
+      property="og:description"
+      content="A data-free, training-free method that diagnoses attention-head roles directly from frozen query-key projections."
+    />
+    <meta property="og:image" content="static/images/aoh/aoh-introduction.png" />
+    <meta property="og:image:alt" content="AoH retrieval and streaming head analysis" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Autonomy-of-Heads: Data-Free Sparse Attention from Frozen Query-Key Geometry"
+    />
+    <meta
+      name="twitter:description"
+      content="Frozen query-key geometry provides a useful prior for sparse long-context attention."
+    />
+    <meta name="twitter:image" content="static/images/aoh/aoh-introduction.png" />
+
+    <meta
+      name="citation_title"
+      content="Autonomy-of-Heads: Data-Free Sparse Attention from Frozen Query-Key Geometry"
+    />
+    <meta name="citation_author" content="Yehan Yang" />
+    <meta name="citation_author" content="Junyuan Shang" />
+    <meta name="citation_author" content="Yang Li" />
+    <meta name="citation_author" content="Guanqun Zhao" />
+    <meta name="citation_author" content="Shuohuan Wang" />
+    <meta name="citation_author" content="Dianhai Yu" />
+    <meta name="citation_publication_date" content="2026" />
+    <meta name="citation_conference_title" content="ACL submission" />
+
+    <meta name="theme-color" content="#2563eb" />
+    <meta name="msapplication-TileColor" content="#2563eb" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
+    <title>AoH | Data-Free Sparse Attention</title>
+
+    <link rel="icon" type="image/png" href="static/images/aoh/aoh-introduction.png" />
+    <link rel="stylesheet" href="static/css/bulma.min.css" />
+    <link rel="stylesheet" href="static/css/index.css" />
+
+    <script defer src="static/js/fontawesome.all.min.js"></script>
+    <script defer src="static/js/index.js"></script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ScholarlyArticle",
+        "headline": "Autonomy-of-Heads: Data-Free Sparse Attention from Frozen Query-Key Geometry",
+        "description": "AoH identifies retrieval and streaming heads from frozen query-key geometry and enables data-free sparse attention for long-context inference.",
+        "author": [
+          { "@type": "Person", "name": "Yehan Yang" },
+          { "@type": "Person", "name": "Junyuan Shang" },
+          { "@type": "Person", "name": "Yang Li" },
+          { "@type": "Person", "name": "Guanqun Zhao" },
+          { "@type": "Person", "name": "Shuohuan Wang" },
+          { "@type": "Person", "name": "Dianhai Yu" }
+        ],
+        "datePublished": "2026",
+        "publisher": { "@type": "Organization", "name": "ACL submission" },
+        "image": "static/images/aoh/aoh-introduction.png",
+        "keywords": ["sparse attention", "long-context inference", "effective rank", "KV cache"],
+        "abstract": "We propose Autonomy-of-Heads (AoH), a data-free and training-free method that identifies retrieval and streaming heads from the spectral geometry of query-key projections.",
+        "isAccessibleForFree": true,
+        "license": "https://creativecommons.org/licenses/by/4.0/"
+      }
+    </script>
+  </head>
+  <body>
+    <button
+      class="scroll-to-top"
+      onclick="scrollToTop()"
+      title="Scroll to top"
+      aria-label="Scroll to top"
+    >
+      <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <main id="main-content">
+      <section class="hero publication-header">
+        <div class="hero-body">
+          <div class="container is-max-desktop">
+            <div class="columns is-centered">
+              <div class="column has-text-centered">
+                <div class="publication-logos" role="group" aria-label="Affiliated organizations">
+                  <img
+                    class="publication-logo-wenxin"
+                    src="static/images/aoh/wenxin-logo.png"
+                    alt="Baidu Wenxin"
+                  />
+                  <img
+                    class="publication-logo-ict"
+                    src="static/images/aoh/ict-logo.png"
+                    alt="Institute of Computing Technology, Chinese Academy of Sciences"
+                  />
+                  <img
+                    class="publication-logo-ucas"
+                    src="static/images/aoh/ucas-logo.png"
+                    alt="University of Chinese Academy of Sciences"
+                  />
+                </div>
+                <h1 class="title is-1 publication-title">
+                  Autonomy-of-Heads: Data-Free Sparse Attention from Frozen Query-Key Geometry
+                </h1>
+
+                <div class="is-size-5 publication-authors aoh-author-list">
+                  <span class="author-block author-name">Yehan Yang<sup>1,2</sup>,</span>
+                  <span class="author-block author-name">Junyuan Shang<sup>4,†</sup>,</span>
+                  <span class="author-block author-name">Yang Li<sup>1,2</sup>,</span>
+                  <span class="author-block author-name">Guanqun Zhao<sup>3,4</sup>,</span>
+                  <span class="author-block author-name"><strong>Shuohuan Wang</strong><sup>4</sup>,</span>
+                  <span class="author-block author-name"><strong>Dianhai Yu</strong><sup>4</sup></span>
+                </div>
+
+                <div class="is-size-6 publication-authors aoh-affiliations">
+                  <span class="author-block">
+                    <sup>1</sup> Institute of Computing Technology, Chinese Academy of Sciences<br />
+                    <sup>2</sup> University of Chinese Academy of Sciences<br />
+                    <sup>3</sup> Beijing University of Posts and Telecommunications<br />
+                    <sup>4</sup> Baidu Inc.
+                  </span>
+                </div>
+
+                <div class="column has-text-centered">
+                  <div class="publication-links">
+                    <span class="link-block">
+                      <a
+                        href="static/images/aoh-paper.pdf"
+                        class="external-link button is-normal is-rounded is-dark"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                        <span>Paper</span>
+                      </a>
+                    </span>
+                    <span class="link-block">
+                      <a
+                        href="https://github.com/ernie-research/AoH"
+                        class="external-link button is-normal is-rounded is-dark"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <span class="icon"><i class="fab fa-github"></i></span>
+                        <span>Code</span>
+                      </a>
+                    </span>
+                    <span class="link-block">
+                      <button
+                        type="button"
+                        class="external-link button is-normal is-rounded is-dark publication-demo-button"
+                        title="Demo link coming soon"
+                        disabled
+                      >
+                        <span class="icon"><i class="fas fa-laptop-code"></i></span>
+                        <span>Demo</span>
+                      </button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section hero is-light">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-full">
+              <h2 class="title is-3">Abstract</h2>
+              <div class="abstract-layout">
+                <div class="abstract-copy content has-text-justified">
+                  <p>
+                    Long-context LLM inference faces quadratic attention cost and growing KV-cache memory. Existing sparse attention methods rely on runtime attention, calibration prompts, or learned gates, making head selection input-dependent and costly. We instead ask whether head function can be inferred directly from frozen weights. We propose <strong>Autonomy-of-Heads (AoH)</strong>, a data-free and training-free method that identifies retrieval and streaming heads from the spectral geometry of query-key projections. AoH defines the kernel attention operator <i>M<sub>h</sub> = W<sub>K</sub><sup>h⊤</sup>W<sub>Q</sub><sup>h</sup></i> and uses its effective rank as a weight-space measure of head function: concentrated spectra indicate a small number of dominant query-key matching directions and are associated with retrieval heads, whereas diffuse spectra indicate the absence of a dominant global matching direction and are associated with streaming heads. We further derive an efficient <i>d<sub>head</sub></i>-dimensional computation that avoids constructing the full <i>d<sub>model</sub> × d<sub>model</sub></i> matrix. Experiments on LongBench across models show that AoH provides a strong data-free head classifier and achieves competitive accuracy with substantially reduced attention computation and KV-cache budgets. In efficiency, AoH achieves up to <strong>3.24× faster prefill, 9.14× faster decode, and 3.98× KV-cache memory reduction at 256K tokens.</strong>
+                  </p>
+                </div>
+                <figure class="abstract-visual-stack">
+                  <img
+                    src="static/images/aoh/aoh-accuracy.png"
+                    alt="Llama3.1-8B-Instruct LongBench average score versus sparsity"
+                    loading="lazy"
+                  />
+                  <img
+                    src="static/images/aoh/aoh-efficiency.png"
+                    alt="Llama3.1-8B-Instruct efficiency at 256K context and 75% sparsity"
+                    loading="lazy"
+                  />
+                  <figcaption>
+                    <p>
+                      Accuracy-efficiency trade-off of AoH.
+                    </p>
+                    <p>
+                      Llama3.1-8B-Instruct efficiency at 256K context and 75% sparsity, where AoH achieves 3.24× prefill speedup, 9.14× decode speedup, and 3.98× GPU memory reduction.
+                    </p>
+                  </figcaption>
+                </figure>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container is-max-desktop">
+          <h2 class="title is-3 has-text-centered">
+            Observations: Effective rank reflects stable head behavior.
+          </h2>
+          <div class="content has-text-justified">
+            <p>
+              We first ask whether frozen query-key geometry reflects stable and functional differences among attention heads. Across context lengths, per-head average attention distance remains structurally stable, suggesting that long-range attention is a persistent head-level property rather than a prompt-length artifact.
+            </p>
+            <p>
+              Effective rank is consistently negatively correlated with long-range behavior. Lower-effective-rank heads tend to attend farther into the context, while higher-effective-rank heads are more local. A passkey-retrieval ablation further shows a clear functional separation: converting low-effective-rank heads to sink-plus-recent attention rapidly collapses retrieval accuracy, whereas converting high-effective-rank heads has little impact.
+            </p>
+          </div>
+          <article class="project-figure figure-wide">
+            <div class="project-figure-media">
+              <img
+                src="static/images/aoh/aoh-attention-distance.png"
+                alt="Per-head average attention distance heatmaps and effective rank versus attention distance on Qwen2.5-7B"
+                loading="lazy"
+              />
+            </div>
+            <div class="project-figure-caption">
+              <h3 class="subtitle has-text-centered">
+                Empirical relationship between effective rank and head attention distance on Qwen2.5-7B. Left: Per-head average attention distance heatmaps under context lengths from 4K to 100K. The layer–head distance patterns remain largely consistent across context lengths. Right: Scatter plot of effective rank versus average attention distance, with points colored by layer. Heads with lower effective rank tend to attend farther into the context, while high-ER heads concentrate on recent tokens.
+              </h3>
+            </div>
+          </article>
+          <article class="project-figure passkey-split-figure aoh-secondary-figure">
+            <div class="project-figure-caption">
+              <h3 class="subtitle has-text-centered">
+                Passkey retrieval under progressive head-to-streaming conversion. Restricting low-ER heads to sink-and-recent attention rapidly collapses retrieval accuracy, while restricting high-ER heads has little impact.
+              </h3>
+            </div>
+            <div class="project-figure-media">
+              <img
+                src="static/images/aoh/aoh-passkey.png"
+                alt="Passkey retrieval accuracy under progressive conversion of heads to streaming attention"
+                loading="lazy"
+              />
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="heads-know-what-they-know">
+        <div class="container is-max-desktop">
+          <h2 class="title is-3 has-text-centered">Heads Know What They Know!</h2>
+          <article class="project-figure figure-wide">
+            <div class="project-figure-media">
+              <img
+                src="static/images/aoh/aoh-introduction.png"
+                alt="Visualization of the singular value spectrum and attention maps for retrieval and streaming heads"
+                loading="lazy"
+              />
+            </div>
+            <div class="project-figure-caption">
+              <h3 class="subtitle has-text-centered">
+                Visualization of the <i>M<sub>h</sub></i> singular value spectrum and attention maps in the Qwen2.5-7B model for the sentence <em>“The best fruit is orange. What is the best fruit? Orange.”</em>, showing that concentrated spectra correspond to retrieval heads while uniform spectra correspond to streaming heads. Left: Retrieval heads (e.g., Layer 15, Head 20) attend selectively to contextually relevant tokens, requiring full attention. Center: <i>M<sub>h</sub></i> singular value spectrum heatmap; orange-highlighted rows (concentrated spectrum) are retrieval heads, red-highlighted rows (uniform spectrum) are streaming heads. Right: Streaming heads (e.g., Layer 15, Head 11) focus on sink and recent tokens, sufficient with sliding-window attention.
+              </h3>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="method">
+        <div class="container is-max-desktop">
+          <h2 class="title is-3 has-text-centered">
+            Method: Autonomy-of-Heads from frozen query-key geometry.
+          </h2>
+          <div class="method-layout">
+            <div class="method-copy content has-text-justified">
+              <p>
+                During decoding, the attention score of head <i>h</i> can be written as <i>scores<sub>h,i</sub> = X<sub>ctx</sub>W<sub>K</sub><sup>h⊤</sup>W<sub>Q</sub><sup>h</sup>x<sub>i</sub></i>. The context matrix and query vector are shared across heads, while the middle operator is head-specific. We therefore define the kernel attention matrix <i>M<sub>h</sub> = W<sub>K</sub><sup>h⊤</sup>W<sub>Q</sub><sup>h</sup></i>, which connects query-side information demand to key-side information supply.
+              </p>
+              <p>
+                AoH uses the effective rank of <i>M<sub>h</sub></i> to quantify spectral concentration. Low-effective-rank heads are classified as <strong>retrieval heads</strong>, which retain access to global context. High-effective-rank heads are classified as <strong>streaming heads</strong>, which use sink tokens and a recent-window cache. Because AoH depends only on frozen weights, the classification is computed once per model before any prompt is processed.
+              </p>
+              <p>
+                Directly constructing the full <i>d<sub>model</sub> × d<sub>model</sub></i> matrix is unnecessary. The nonzero singular values can be obtained from the smaller <i>d<sub>head</sub> × d<sub>head</sub></i> proxy <i>C<sub>h</sub> = (W<sub>Q</sub><sup>h</sup>W<sub>Q</sub><sup>h⊤</sup>)(W<sub>K</sub><sup>h</sup>W<sub>K</sub><sup>h⊤</sup>)</i>, reducing the computation to a low-dimensional eigenvalue problem.
+              </p>
+            </div>
+            <figure class="method-visual">
+              <img
+                src="static/images/aoh/aoh-duoattention-original.png"
+                alt="Training-based head diagnosis compared with data-free AoH head diagnosis"
+                loading="lazy"
+              />
+              <figcaption>Training-based head diagnosis vs. AoH.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="experiments">
+        <div class="container is-max-desktop">
+          <h2 class="title is-3 has-text-centered">Experiments</h2>
+          <div class="content has-text-justified">
+            <p>
+              We evaluate AoH on LongBench, a long-context understanding suite covering 21 tasks across six categories. The main models are Qwen2.5-7B, Qwen3-8B, and Llama3.1-8B-Instruct. Unless otherwise stated, streaming heads retain 128 sink tokens and a 256-token recent window, and the main experiments use 50% per-layer sparsity.
+            </p>
+            <p>
+              With 50% sparsity, AoH remains close to Full Attention while reducing KV budgets by half. On Qwen3-8B, AoH reaches an average score of 38.78 versus 39.10 for dense attention. On Llama3.1-8B-Instruct, AoH reaches 47.55 versus 48.65 for dense attention. Under the same budget, AoH substantially outperforms random and reversed effective-rank selections.
+            </p>
+          </div>
+
+          <article class="project-figure figure-wide">
+            <div class="project-figure-media">
+              <img
+                src="static/images/aoh/aoh-main-results.png"
+                alt="Table 4 showing the main LongBench results for Qwen3-8B and Llama3.1-8B-Instruct"
+                loading="lazy"
+              />
+            </div>
+            <div class="project-figure-caption">
+              <h3 class="subtitle has-text-centered">
+                LongBench results on Qwen3-8B and Llama3.1-8B-Instruct. All AoH variants use a retrieval/streaming ratio of 0.5 unless otherwise stated. <i>Random</i><sub>avg</sub> randomly selects the same number of retrieval heads, and Reverse keeps the highest effective-rank heads as retrieval heads. sp refers to the sparsity ratio: <i>sparsity</i> = 1 − <i>N</i><sub>full</sub>/<i>N</i><sub>total</sub>. AoH-RoPE uses a RoPE-aware effective-rank score computed with relative RoPE rotations up to Δ = 32K.
+              </h3>
+            </div>
+          </article>
+
+          <article class="project-figure figure-wide">
+            <div class="project-figure-media">
+              <img
+                src="static/images/aoh/aoh-efficiency-table.png"
+                alt="Table 11 showing prefill and decode latency and KV memory of AoH on LLaMA-3.1-8B across sparsity levels and context lengths"
+                loading="lazy"
+              />
+            </div>
+            <div class="project-figure-caption">
+              <h3 class="subtitle has-text-centered">
+                Prefill/decode latency and KV memory of AoH on LLaMA-3.1-8B across sparsity levels and context lengths. Speedups and memory reduction are relative to Full Attention.
+              </h3>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container is-max-desktop">
+          <h2 class="title is-3 has-text-centered">Conclusion</h2>
+          <div class="content has-text-justified">
+            <p>
+              We presented <strong>Autonomy-of-Heads (AoH)</strong>, a data-free and training-free method for identifying retrieval and streaming heads from frozen query-key geometry. By analyzing the effective-rank of the kernel attention matrix <i>M<sub>h</sub> = W<sub>K</sub><sup>h⊤</sup>W<sub>Q</sub><sup>h</sup></i>, AoH replaces calibration data and learned gates with a one-time weight-space classifier. Across multiple long-context LLMs, AoH preserves 96.5% Full Attention performance on average at 50% sparsity and consistently outperforms random, reversed head selection, and training-free baselines. On the hardware side, AoH achieves up to <strong>3.24×</strong> prefill speedup and <strong>9.14×</strong> decode speedup at 256K context on Llama3.1-8B, while reducing KV-cache memory by up to <strong>3.98×</strong> under 75% sparsity. More broadly, AoH provides a simple and extensible head prior for sparse attention, and can be combined with existing KV-cache compression or token-selection methods to improve long-context inference without additional training.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- BibTeX section temporarily hidden.
+      <section class="section" id="BibTeX">
+        <div class="container is-max-desktop content">
+          <div class="bibtex-header">
+            <h2 class="title">BibTeX</h2>
+            <button
+              class="copy-bibtex-btn"
+              onclick="copyBibTeX()"
+              title="Copy BibTeX to clipboard"
+            >
+              <i class="fas fa-copy"></i>
+              <span class="copy-text">Copy</span>
+            </button>
+          </div>
+          <pre id="bibtex-code"><code>@misc{aoh2026,
+    title = "Autonomy-of-Heads: Data-Free Sparse Attention from Frozen Query-Key Geometry",
+    author = "Yehan Yang and Junyuan Shang and Yang Li and Guanqun Zhao and Shuohuan Wang and Dianhai Yu",
+    year = "2026",
+    note = "ACL submission"
+}</code></pre>
+        </div>
+      </section>
+      -->
+    </main>
+
+  </body>
+</html>
