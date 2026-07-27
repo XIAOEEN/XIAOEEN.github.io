@@ -206,20 +206,16 @@ body {
 .publication-logos img {
   display: block;
   width: auto;
-  height: auto;
+  height: 58px;
   object-fit: contain;
 }
 
 .publication-logo-ict {
-  max-width: 280px;
+  transform: translateY(3px);
 }
 
 .publication-logo-ucas {
-  max-width: 280px;
-}
-
-.publication-logo-wenxin {
-  max-width: 180px;
+  transform: translateY(-2px);
 }
 
 .publication-logo {
@@ -645,13 +641,25 @@ code {
   }
 
   .publication-logos {
-    gap: 0.75rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+    gap: 1.25rem 1rem;
     margin-bottom: 1.5rem;
     padding: 0 0.25rem;
   }
 
   .publication-logos img {
-    max-width: 30vw;
+    width: 100%;
+    height: auto;
+    max-width: none;
+    transform: none;
+  }
+
+  .publication-logo-wenxin {
+    grid-column: 1 / -1;
+    width: min(72vw, 360px) !important;
+    justify-self: center;
   }
 
   .publication-logo img {
@@ -732,7 +740,7 @@ code {
 
 @media screen and (max-width: 480px) {
   .publication-logos {
-    gap: 0.45rem;
+    gap: 0.9rem 0.7rem;
   }
 
   .publication-title {
