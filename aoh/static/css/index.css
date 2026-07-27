@@ -881,6 +881,18 @@ a:focus {
   font-weight: 800;
 }
 
+.aoh-author-list .author-name-link,
+.aoh-author-list .author-name-link:hover {
+  color: inherit !important;
+  font-weight: inherit;
+  text-decoration: none;
+  position: static;
+}
+
+.aoh-author-list .author-name-link::after {
+  display: none;
+}
+
 .aoh-author-list sup,
 .aoh-affiliations sup {
   font-size: 0.68em;
