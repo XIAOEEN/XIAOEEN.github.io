@@ -30,7 +30,7 @@ I am a Ph.D. student at the Media Synthesis and Forensics Lab (formerly known as
 <div class='paper-box-image'><div><div class="badge">arXiv 2026</div><img src="{{ '/images/publications/AoH.svg' | relative_url }}" alt="Autonomy-of-Heads attention head visualization" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
-**[Autonomy-of-Heads: Data-Free Sparse Attention from Frozen Query-Key Geometry](aRxiv comming soon...)**
+**[Autonomy-of-Heads: Data-Free Sparse Attention from Frozen Query-Key Geometry](https://undground.fun/aoh/)**
 
 **<u>Yehan Yang</u>, Junyuan Shang, Guanqun Zhao, Dianhai Yu, Shuohuan Wang** <br>
 
