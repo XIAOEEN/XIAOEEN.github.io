@@ -1,36 +1,41 @@
 ---
 layout: default
 permalink: /blogs/rank-1-matrix-householder-wy/
-title: "Rank-1 Matrix（秩-1 矩阵）、Householder 与 WY Representation"
-description: "从秩-1 外积到 Householder 变换与紧凑 WY 表示，理解其在分块并行计算中的作用。"
+title: "Rank-1 Matrices, Householder Transformations, and the WY Representation"
+description: "From rank-1 outer products to Householder transformations and the compact WY representation: why low-rank structure matters for blockwise GPU computation."
+date: 2026-04-15
+display_date: "April, 15, 2026"
+language: "English"
+topic: "LINEAR ALGEBRA · EFFICIENT SEQUENCE MODELS"
+blog_label: "Linear Algebra"
+author_profile: false
+blog_article: true
+blog_sidebar: toc
 ---
 
-<article class="blog-article" lang="zh-CN" markdown="1">
-
-<a class="blog-back-link" href="{{ '/blogs/' | relative_url }}">← 返回 Blogs</a>
+<article class="blog-article" lang="en" markdown="1">
 
 <header class="blog-article__header">
-  <p class="blog-eyebrow">LINEAR ALGEBRA · EFFICIENT SEQUENCE MODELS</p>
-  <h1>Rank-1 Matrix（秩-1 矩阵）、Householder 与 WY Representation</h1>
-  <p class="blog-article__meta"><time datetime="2026-07-27">2026-07-27</time> · 约 8 分钟阅读</p>
-  <p class="blog-article__lead">从一个简单的向量外积出发，逐步理解多个秩-1 更新如何被压缩成适合 GPU 批量计算的矩阵形式。</p>
+  <h1>Rank-1 Matrices, Householder Transformations, and the WY Representation</h1>
+  <p class="blog-article__meta"><time datetime="2026-04-15">April, 15, 2026</time> · 8 min read</p>
+  <p class="blog-article__lead">Starting from a simple vector outer product, this note develops the compact matrix form that turns a sequence of rank-1 transformations into GPU-friendly blockwise computation.</p>
 </header>
 
-## 1. 什么是秩-1 矩阵？
+## 1. What Is a Rank-1 Matrix?
 
-矩阵的秩（Rank）表示其行向量或列向量中极大线性无关组的大小。一个秩-1 矩阵可以写成一个列向量与一个行向量的外积：
+The rank of a matrix is the size of a maximal linearly independent set of its rows or columns. A rank-1 matrix can be written as the outer product of a column vector and a row vector:
 
 $$
-A = u v^\top,
+A = uv^\top,
 $$
 
-其中 $u \in \mathbb{R}^{m}$，$v \in \mathbb{R}^{n}$，因此 $A \in \mathbb{R}^{m \times n}$。
+where $u \in \mathbb{R}^{m}$ and $v \in \mathbb{R}^{n}$, so $A \in \mathbb{R}^{m \times n}$.
 
-需要注意：只有当 $u$ 和 $v$ 都是非零向量时，$uv^\top$ 的秩才严格等于 1；如果其中任意一个是零向量，结果就是秩-0 的零矩阵。换句话说，两个非零列向量中的一个乘以另一个的转置，得到的就是秩-1 矩阵。
+Strictly speaking, $uv^\top$ has rank 1 only when both $u$ and $v$ are nonzero. If either vector is zero, the result is the rank-0 zero matrix. Therefore, the outer product of two nonzero column vectors—one multiplied by the transpose of the other—is a rank-1 matrix.
 
-### 一个简单例子
+### A Simple Example
 
-令
+Let
 
 $$
 u = \begin{bmatrix} 1 \\ 2 \end{bmatrix},
@@ -38,7 +43,7 @@ u = \begin{bmatrix} 1 \\ 2 \end{bmatrix},
 v = \begin{bmatrix} 3 \\ 4 \end{bmatrix}.
 $$
 
-它们的外积为
+Their outer product is
 
 $$
 uv^\top
@@ -47,70 +52,70 @@ uv^\top
 = \begin{bmatrix} 3 & 4 \\ 6 & 8 \end{bmatrix}.
 $$
 
-第二行恰好是第一行的 2 倍。这个 $2 \times 2$ 矩阵看似包含四个元素，本质上却只由两个一维向量决定。
+The second row is exactly twice the first. Although this $2 \times 2$ matrix contains four entries, all of its information is determined by two one-dimensional vectors.
 
-## 2. DeltaNet 中的秩-1 更新
+## 2. Rank-1 Updates in DeltaNet
 
-考虑 DeltaNet 风格的状态更新：
+Consider a DeltaNet-style state update:
 
 $$
-S_t = \left(\mathbf{I} - \beta_t k_t k_t^\top\right) S_{t-1}
+S_t = \left(\mathbf{I} - \beta_t k_t k_t^\top\right)S_{t-1}
       + \beta_t k_t v_t^\top.
 $$
 
-其中，$k_tk_t^\top$ 与 $k_tv_t^\top$ 都是秩至多为 1 的矩阵。直观上，每一步并不是对整个记忆矩阵 $S$ 做任意的全局改写，而是沿着由 $k_t$ 指定的单一方向进行低维度的擦除与写入。
+Both $k_tk_t^\top$ and $k_tv_t^\top$ have rank at most 1. Intuitively, each step does not perform an arbitrary global rewrite of the memory matrix $S$. Instead, it erases and writes information along the single direction specified by $k_t$.
 
-## 3. 从 Householder 变换到串行瓶颈
+## 3. Householder Transformations and the Serial Bottleneck
 
-数值线性代数中常见的 Householder 变换可以写成
+A Householder transformation commonly used in numerical linear algebra has the form
 
 $$
 H = \mathbf{I} - \beta vv^\top.
 $$
 
-它同样具有“单位矩阵减去秩-1 矩阵”的结构。若连续应用 $r$ 个这样的变换，直接计算
+It has the same “identity minus a rank-1 matrix” structure. If we apply $r$ such transformations, directly evaluating
 
 $$
 P_r = H_1H_2\cdots H_r
 $$
 
-会形成一条依赖链：后一次矩阵乘法必须等待前一次完成。现代 GPU 更擅长大规模、规则的矩阵乘法（GEMM），因此逐个构造并连乘完整的 $d_k \times d_k$ 变换矩阵通常不是理想实现。
+creates a dependency chain: every matrix multiplication must wait for the preceding one. Modern GPUs are most efficient on large, regular matrix multiplications (GEMMs), so explicitly constructing and multiplying $r$ full $d_k \times d_k$ transformation matrices is usually a poor implementation strategy.
 
-## 4. WY Representation
+## 4. The Compact WY Representation
 
-紧凑 WY 表示的核心思想，是把一串秩-1 变换的乘积写成两个“高而窄”的矩阵：
+The central idea of the compact WY representation is to express a product of rank-1 transformations using two tall, narrow matrices:
 
 $$
 P_r = \mathbf{I} - W_rY_r^\top.
 $$
 
-令
+Define
 
 $$
 Y_r = \begin{bmatrix} k_1 & k_2 & \cdots & k_r \end{bmatrix}
 \in \mathbb{R}^{d_k \times r},
 $$
 
-并令
+and
 
 $$
 W_r = \begin{bmatrix} w_1 & w_2 & \cdots & w_r \end{bmatrix}
 \in \mathbb{R}^{d_k \times r}.
 $$
 
-于是
+Then
 
 $$
-W_rY_r^\top = \sum_{i=1}^{r} w_i k_i^\top,
+W_rY_r^\top = \sum_{i=1}^{r} w_i k_i^\top.
 $$
 
-也就是将 $r$ 个秩-1 矩阵统一打包到一次低秩矩阵乘法中。
+In other words, the representation packages $r$ rank-1 matrices into a single low-rank matrix product.
 
-例如，当 $d_k=128$、Chunk Size $r=64$ 时，$W_r$ 与 $Y_r$ 的大小都是 $128 \times 64$，而 $Y_r^\top$ 的大小是 $64 \times 128$。
+For example, if $d_k=128$ and the chunk size is $r=64$, both $W_r$ and $Y_r$ have shape $128 \times 64$, while $Y_r^\top$ has shape $64 \times 128$.
 
-## 5. 两步情形：$W$ 是怎样产生的？
+## 5. The Two-Step Case: Where Does $W$ Come From?
 
-为了保持乘积方向与递推公式一致，这里采用
+To keep the multiplication order consistent with the recurrence, consider
 
 $$
 P_2 = H_1H_2
@@ -118,7 +123,7 @@ P_2 = H_1H_2
   \left(\mathbf{I}-\beta_2k_2k_2^\top\right).
 $$
 
-展开可得
+Expanding the product gives
 
 $$
 \begin{aligned}
@@ -130,35 +135,35 @@ P_2
 \end{aligned}
 $$
 
-定义
+Define
 
 $$
-w_1 = \beta_1k_1,
+w_1 = \beta_1k_1
 $$
 
-以及
+and
 
 $$
 w_2
-= \beta_2\left(k_2-w_1\left(k_1^\top k_2\right)\right),
+= \beta_2\left(k_2-w_1\left(k_1^\top k_2\right)\right).
 $$
 
-就可以写成
+The product can now be written as
 
 $$
 P_2 = \mathbf{I} - w_1k_1^\top - w_2k_2^\top
     = \mathbf{I} - W_2Y_2^\top.
 $$
 
-## 6. 一般递推公式
+## 6. The General Recurrence
 
-假设前 $r-1$ 个变换已经表示为
+Assume that the first $r-1$ transformations have already been represented as
 
 $$
 P_{r-1}=\mathbf{I}-W_{r-1}Y_{r-1}^\top.
 $$
 
-加入第 $r$ 个变换后，
+After introducing the $r$-th transformation,
 
 $$
 P_r=P_{r-1}H_r
@@ -166,7 +171,7 @@ P_r=P_{r-1}H_r
  \left(\mathbf{I}-\beta_rk_rk_r^\top\right).
 $$
 
-整理得到
+Collecting terms gives
 
 $$
 P_r
@@ -174,7 +179,7 @@ P_r
 - \underbrace{\beta_r\left(k_r-W_{r-1}\left(Y_{r-1}^\top k_r\right)\right)}_{w_r}k_r^\top.
 $$
 
-因此，新的辅助向量满足
+Therefore, the new auxiliary vector is
 
 $$
 w_r
@@ -182,15 +187,15 @@ w_r
 = \beta_r\left(k_r-\sum_{i=1}^{r-1}w_i\left(k_i^\top k_r\right)\right).
 $$
 
-将 $w_r$ 和 $k_r$ 分别追加到 $W_{r-1}$ 与 $Y_{r-1}$ 后，就得到 $W_r$ 和 $Y_r$。
+Appending $w_r$ and $k_r$ to $W_{r-1}$ and $Y_{r-1}$, respectively, produces $W_r$ and $Y_r$.
 
 <div class="blog-note" markdown="1">
-**关于乘积方向：** 如果使用 $H_rH_{r-1}\cdots H_1$ 的顺序，由于每个 $H_i$ 都是对称矩阵，可以对上式取转置，得到相应的 $\mathbf{I}-Y_rW_r^\top$ 形式。推导时必须固定乘积方向，不能混用两种记号。
+**A note on multiplication order.** If the transformations are ordered as $H_rH_{r-1}\cdots H_1$, the symmetry of each $H_i$ lets us transpose the expression above and obtain the corresponding $\mathbf{I}-Y_rW_r^\top$ form. The multiplication order must remain fixed throughout a derivation; the two conventions should not be mixed.
 </div>
 
-## 7. WY 为什么更适合分块计算？
+## 7. Why WY Is Better Suited to Blockwise Computation
 
-当累积变换作用于初始状态矩阵 $S_0$ 时，
+When the accumulated transformation acts on an initial state matrix $S_0$,
 
 $$
 P_rS_0
@@ -198,32 +203,24 @@ P_rS_0
 = S_0-W_r\left(Y_r^\top S_0\right).
 $$
 
-若 $d_k=128$、$r=64$，计算可以拆成两个规则的 GEMM：
+For $d_k=128$ and $r=64$, the computation becomes two regular GEMMs:
 
-1. 计算 $Y_r^\top S_0$：
+1. Compute $Y_r^\top S_0$:
 
    $$
    (64\times128)(128\times128)\rightarrow64\times128.
    $$
 
-2. 计算 $W_r(Y_r^\top S_0)$：
+2. Compute $W_r(Y_r^\top S_0)$:
 
    $$
    (128\times64)(64\times128)\rightarrow128\times128.
    $$
 
-这种形式避免了显式构造并串行连乘 $r$ 个完整的 $128\times128$ 变换矩阵，使主要计算落到 GPU 高度优化的矩阵乘法内核上。
+This form avoids explicitly constructing and serially multiplying $r$ full $128\times128$ transformation matrices. The dominant work is instead expressed through matrix multiplication kernels that GPUs execute efficiently.
 
-不过，WY 表示并不意味着所有依赖都自动消失：$W_r$ 的构造本身仍包含结构化递推。实际系统通常结合分块、批处理或三角结构算法高效生成辅助矩阵；WY 最直接的收益，是让**累积变换的存储与应用**转化为紧凑的低秩矩阵运算。
+The WY representation does not, however, make every dependency disappear. Constructing $W_r$ still involves a structured recurrence. Practical systems typically combine blocking, batching, or triangular algorithms to build the auxiliary matrices efficiently. The most direct benefit of WY is that the **storage and application of an accumulated transformation** become compact low-rank matrix operations.
 
-## 8. 总结
-
-- 非零向量的外积 $uv^\top$ 是秩-1 矩阵。
-- DeltaNet 中的擦除项和写入项都可以理解为沿单一方向的秩-1 更新。
-- Householder 变换具有 $\mathbf{I}-\beta vv^\top$ 的结构。
-- 紧凑 WY 表示把多个秩-1 变换组织为 $\mathbf{I}-WY^\top$。
-- 对一个 Chunk 的累积变换可以通过低秩矩阵和 GEMM 高效应用，但辅助矩阵的构造仍需正确处理递推依赖。
-
-<a class="blog-back-link blog-back-link--footer" href="{{ '/blogs/' | relative_url }}">← 返回 Blogs</a>
+<a class="blog-back-button" href="{{ '/blogs/' | relative_url }}" data-blog-back>← Back to Blogs</a>
 
 </article>

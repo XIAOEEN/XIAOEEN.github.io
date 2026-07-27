@@ -2,20 +2,32 @@
 layout: default
 permalink: /blogs/
 title: "Blogs"
+author_profile: false
+blog_index: true
 ---
 
+{% assign blog_articles = site.pages | where: "blog_article", true | sort: "date" | reverse %}
+
 <section class="blog-index" aria-labelledby="blog-index-title">
+  <a class="blog-index__back" href="{{ '/' | relative_url }}">‹&nbsp;&nbsp;Back to Home</a>
+
   <header class="blog-index__header">
-    <p class="blog-eyebrow">BLOGS</p>
-    <h1 id="blog-index-title">Research Notes</h1>
-    <p>关于大模型、高效计算与线性代数的学习笔记。</p>
+    <h1 id="blog-index-title">📝 Blogs</h1>
   </header>
 
-  <article class="blog-card">
-    <p class="blog-card__topic">LINEAR ALGEBRA · EFFICIENT SEQUENCE MODELS</p>
-    <h2><a href="{{ '/blogs/rank-1-matrix-householder-wy/' | relative_url }}">Rank-1 Matrix（秩-1 矩阵）、Householder 与 WY Representation</a></h2>
-    <p class="blog-card__meta"><time datetime="2026-07-27">2026-07-27</time> · 中文</p>
-    <p class="blog-card__summary">从向量外积出发，理解 Householder 变换如何通过紧凑 WY 表示被组织为低秩矩阵运算，以及这种改写为何更适合 GPU 上的分块计算。</p>
-    <a class="blog-card__link" href="{{ '/blogs/rank-1-matrix-householder-wy/' | relative_url }}" aria-label="阅读 Rank-1 Matrix、Householder 与 WY Representation">阅读全文 <span aria-hidden="true">→</span></a>
-  </article>
+  <div class="blog-index__list">
+    {% for article in blog_articles %}
+      <a class="blog-list-item" href="{{ article.url | relative_url }}" aria-label="Read {{ article.title }}">
+        <span class="blog-list-item__body">
+          <strong class="blog-list-item__title">{{ article.title }}</strong>
+          <span class="blog-list-item__meta">
+            <time datetime="{{ article.date | date: '%Y-%m-%d' }}">{% if article.display_date %}{{ article.display_date }}{% else %}{{ article.date | date: "%B %d, %Y" }}{% endif %}</time>
+            {% if article.blog_label %}<span class="blog-list-item__badge">{{ article.blog_label }}</span>{% endif %}
+          </span>
+          <span class="blog-list-item__summary">{{ article.description }}</span>
+        </span>
+        <span class="blog-list-item__chevron" aria-hidden="true">›</span>
+      </a>
+    {% endfor %}
+  </div>
 </section>

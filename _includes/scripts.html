@@ -1,4 +1,8 @@
 <script src="{{ '/assets/js/main.min.js' | relative_url }}"></script>
 
+{% if page.blog_sidebar == "toc" %}
+  <script src="{{ '/assets/js/blog-toc.js' | relative_url }}"></script>
+{% endif %}
+
 {% include analytics.html %}
 {% include fetch_google_scholar_stats.html %}
