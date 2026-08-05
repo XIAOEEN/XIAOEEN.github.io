@@ -407,6 +407,31 @@ body {
   color: #475569;
 }
 
+.aoh-demo-section {
+  padding-top: 4.5rem;
+  padding-bottom: 4.5rem;
+  scroll-margin-top: 1rem;
+}
+
+.aoh-demo-player {
+  max-width: 1024px;
+  margin: 0 auto;
+  overflow: hidden;
+  border: 1px solid #1e293b;
+  border-radius: var(--border-radius-lg);
+  background: #020617;
+  box-shadow: var(--shadow-xl);
+  text-align: left;
+}
+
+.aoh-demo-video {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 78vh;
+  background: #020617;
+}
+
 .abstract-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -677,6 +702,15 @@ code {
   .section-subtitle {
     margin: -0.5rem auto 1.5rem;
     font-size: 0.95rem;
+  }
+
+  .aoh-demo-section {
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .aoh-demo-player {
+    border-radius: var(--border-radius);
   }
 
   .figure-wide .project-figure-media img {
