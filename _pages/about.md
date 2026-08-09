@@ -28,6 +28,18 @@ I am a Ph.D. student at the Media Synthesis and Forensics Lab (formerly known as
 # 📝 Publications 
 
 <div class='paper-box'>
+<div class='paper-box-image'><div><div class="badge">arXiv 2026</div><img src="{{ '/images/publications/ESTR.svg' | relative_url }}" alt="Synchronous vs. asynchronous agentic RL" width="100%"></div></div>
+<div class='paper-box-text' markdown="1">
+
+**[Deconstructing Off-Policy Ratios: Entropy-Scaled Trust Regions for Asynchronous Reinforcement Learning](https://arxiv.org/pdf/2607.22186/)**
+
+**Guanqun Zhao, Zijun Xie, Binbin Zheng, Enlei Gong, Jiafeng Lu, <u>Yehan Yang</u>, Aoqi Hu, Zeyu Chen**<br>
+
+We introduce ESTR, an entropy-scaled trust region that stabilizes asynchronous LLM reinforcement learning by filtering low-entropy off-policy noise while preserving high-entropy exploration. ESTR achieves 37.34 avg@1 on BrowseComp-Plus, 95.69 avg@4 on multi-turn GSM8K, and 28.38 average pass@4 across AIME 2024–2026, matching synchronous GRPO while delivering a 2.6× training speedup.
+</div>
+</div>
+
+<div class='paper-box'>
 <div class='paper-box-image'><div><div class="badge">arXiv 2026</div><img src="{{ '/images/publications/AoH.svg' | relative_url }}" alt="Autonomy-of-Heads attention head visualization" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
