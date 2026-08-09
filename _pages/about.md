@@ -28,6 +28,18 @@ I am a Ph.D. student at the Media Synthesis and Forensics Lab (formerly known as
 # 📝 Publications 
 
 <div class='paper-box'>
+<div class='paper-box-image'><div><div class="badge">arXiv 2026</div><img src="{{ '/images/publications/AoH.svg' | relative_url }}" alt="Autonomy-of-Heads attention head visualization" width="100%"></div></div>
+<div class='paper-box-text' markdown="1">
+
+**[Autonomy-of-Heads: Data-Free Sparse Attention from Frozen Query-Key Geometry](https://undground.fun/aoh/)**
+
+**<u>Yehan Yang</u>, Junyuan Shang, Guanqun Zhao, Dianhai Yu, Shuohuan Wang** <br>
+
+We introduce a data-free hybrid sparse attention method that identifies retrieval-oriented and streaming attention heads directly from the spectral geometry of frozen Query-Key projection matrices. At 256K context, the method achieves up to **3.24× Prefill acceleration**, **9.14× Decode acceleration**, and nearly **4× lower KV-cache memory**.
+</div>
+</div>
+
+<div class='paper-box'>
 <div class='paper-box-image'><div><div class="badge">arXiv 2026</div><img src="{{ '/images/publications/ESTR.svg' | relative_url }}" alt="Synchronous vs. asynchronous agentic RL" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
@@ -39,17 +51,6 @@ We introduce ESTR, an entropy-scaled trust region that stabilizes asynchronous L
 </div>
 </div>
 
-<div class='paper-box'>
-<div class='paper-box-image'><div><div class="badge">arXiv 2026</div><img src="{{ '/images/publications/AoH.svg' | relative_url }}" alt="Autonomy-of-Heads attention head visualization" width="100%"></div></div>
-<div class='paper-box-text' markdown="1">
-
-**[Autonomy-of-Heads: Data-Free Sparse Attention from Frozen Query-Key Geometry](https://undground.fun/aoh/)**
-
-**<u>Yehan Yang</u>, Junyuan Shang, Guanqun Zhao, Dianhai Yu, Shuohuan Wang** <br>
-
-We introduce a data-free hybrid sparse attention method that identifies retrieval-oriented and streaming attention heads directly from the spectral geometry of frozen Query-Key projection matrices. At 256K context, the method achieves up to **3.24× Prefill acceleration**, **9.14× Decode acceleration**, and nearly **4× lower KV-cache memory**.
-</div>
-</div>
 
 <div class='paper-box'>
 <div class='paper-box-image'><div><div class="badge">ACL 2026</div><div class="award-badge">Outstanding Paper Award</div><img src="{{ '/images/publications/race.svg' | relative_url }}" alt="RACE fine-grained detection architecture" width="100%"></div></div>
