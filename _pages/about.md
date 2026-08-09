@@ -18,6 +18,7 @@ I am a Ph.D. student at the Media Synthesis and Forensics Lab (formerly known as
 
 
 # 🔥 News
+-  *2026.08*:  🎉 One Co-author Paper, [**Deconstructing Off-Policy Ratios: Entropy-Scaled Trust Regions for Asynchronous Reinforcement Learning**](https://arxiv.org/pdf/2607.22186), is now available.
 -  *2026.07*: 🏆 One co-author paper [**Beyond the Final Actor: Modeling the Dual Roles of Creator and Editor for Fine-Grained LLM-Generated Text Detection**](https://race.yang-li.cn/) received an ACL 2026 <span class="award-highlight">Outstanding Paper Award</span> and was also selected as an <span class="award-highlight">SAC Highlight</span>.
 -  *2026.06*: 🎉 Our new work, **Autonomy-of-Heads: Data-Free Sparse Attention from Frozen Query-Key Geometry**, is now available. Developed in collaboration with Baidu’s ERNIE pre-training team, it is open for the community to explore, try, and use.
 - *2026.03*: **[Beyond the Final Actor](https://aclanthology.org/2026.acl-long.235.pdf)** was accepted to ACL 2026 as an oral presentation and nominated for an award.
