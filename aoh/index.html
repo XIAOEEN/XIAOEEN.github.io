@@ -402,12 +402,12 @@
         </div>
       </section>
 
-      <!-- BibTeX section temporarily hidden.
-      <section class="section" id="BibTeX">
-        <div class="container is-max-desktop content">
+      <section class="section aoh-cite-section" id="cite">
+        <div class="container is-max-desktop content aoh-cite-card">
           <div class="bibtex-header">
-            <h2 class="title">BibTeX</h2>
+            <h2 class="title is-3">Cite</h2>
             <button
+              type="button"
               class="copy-bibtex-btn"
               onclick="copyBibTeX()"
               title="Copy BibTeX to clipboard"
@@ -416,15 +416,30 @@
               <span class="copy-text">Copy</span>
             </button>
           </div>
-          <pre id="bibtex-code"><code>@misc{aoh2026,
-    title = "Autonomy-of-Heads: Data-Free Sparse Attention from Frozen Query-Key Geometry",
-    author = "Yehan Yang and Junyuan Shang and Yang Li and Guanqun Zhao and Shuohuan Wang and Dianhai Yu",
-    year = "2026",
-    note = "ACL submission"
+          <p class="aoh-cite-intro">
+            If you find AoH useful in your research, please cite our work:
+          </p>
+          <pre id="bibtex-code"><code>@misc{yang2026autonomyheads,
+    title = {Autonomy-of-Heads: Data-Free Sparse Attention from Frozen Query-Key Geometry},
+    author = {Yehan Yang and Junyuan Shang and Yang Li and Guanqun Zhao and Shuohuan Wang and Dianhai Yu},
+    year = {2026},
+    eprint = {2608.06849},
+    archivePrefix = {arXiv},
+    url = {https://arxiv.org/abs/2608.06849}
 }</code></pre>
+          <div class="aoh-cite-link">
+            <a
+              class="button is-dark is-rounded"
+              href="https://arxiv.org/pdf/2608.06849"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span class="icon"><i class="fas fa-file-pdf"></i></span>
+              <span>Cite on arXiv</span>
+            </a>
+          </div>
         </div>
       </section>
-      -->
     </main>
 
   </body>
