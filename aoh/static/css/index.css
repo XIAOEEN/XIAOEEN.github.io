@@ -633,16 +633,7 @@ code {
 }
 
 .aoh-cite-card pre {
-  margin-bottom: 1.5rem !important;
-}
-
-.aoh-cite-link {
-  display: flex;
-  justify-content: center;
-}
-
-.aoh-cite-link .button {
-  min-width: 12rem;
+  margin-bottom: 0 !important;
 }
 
 /* Scroll to Top Button */
