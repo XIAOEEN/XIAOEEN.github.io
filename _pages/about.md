@@ -23,7 +23,7 @@ I am a Ph.D. student at the Media Synthesis and Forensics Lab (formerly known as
 -  *2026.06*: 🎉 Our new work, [**Autonomy-of-Heads: Data-Free Sparse Attention from Frozen Query-Key Geometry**](https://undground.fun/aoh/), is now available. Developed in collaboration with Baidu’s ERNIE pre-training team, it is open for the community to explore, try, and use.
 - *2026.03*: **[Beyond the Final Actor](https://aclanthology.org/2026.acl-long.235.pdf)** was accepted to ACL 2026 as an oral presentation and nominated for an award.
 - *2025.09*: One Co-author Paper:[**From Judgment to Interference**](https://scm.yang-li.cn/) was accepted to NeurIPS 2025 as a poster presentation.
-- *2025.06*: 🎉 [**PhantomHunter: Detecting Unseen Privately-Tuned LLM-Generated Text via Family-Aware Learning**](https://github.com/ICTMCG/Phantomhunter) is now available.
+- *2025.06*: 🎉 [**PhantomHunter: Detecting Unseen Privately-Tuned LLM-Generated Text via Family-Aware Learning**]({{ '/assets/papers/phantomhunter.pdf' | relative_url }}) is now available.
 
 # 📝 Publications 
 
@@ -78,7 +78,7 @@ A streaming content monitoring system that reaches full-text-level safety perfor
 </div>
 </div>
 
-- <span class="publication-badge">arXiv 2026</span> [PhantomHunter: Detecting Unseen Privately-Tuned LLM-Generated Text via Family-Aware Learning](https://github.com/ICTMCG/Phantomhunter)<br>
+- <span class="publication-badge">arXiv 2026</span> [PhantomHunter: Detecting Unseen Privately-Tuned LLM-Generated Text via Family-Aware Learning]({{ '/assets/papers/phantomhunter.pdf' | relative_url }})<br>
   <strong><u>Yehan Yang</u><sup>*</sup>, Yuhui Shi<sup>*</sup>, Qiang Sheng, Hao Mi, Beizhe Hu, Chaoxi Xu, and Juan Cao</strong>
 
 - <span class="publication-badge">arXiv 2025</span> [JingFang: A Traditional Chinese Medicine Large Language Model of Expert-Level Medical Diagnosis and Syndrome Differentiation-Based Treatment](https://arxiv.org/abs/2502.04345)<br>
