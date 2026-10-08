@@ -1,3 +1,4 @@
+
 ---
 permalink: /
 title: ""
@@ -43,7 +44,7 @@ We introduce a data-free hybrid sparse attention method that identifies retrieva
 <div class='paper-box-image'><div><div class="badge">arXiv 2026</div><img src="{{ '/images/publications/ESTR.png' | relative_url }}" alt="Synchronous vs. asynchronous agentic RL" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
-**[Deconstructing Off-Policy Ratios: Entropy-Scaled Trust Regions for Asynchronous Reinforcement Learning](https://arxiv.org/pdf/2607.22186/)**
+**[Deconstructing Off-Policy Ratios: Entropy-Scaled Trust Regions for Asynchronous Reinforcement Learning](https://arxiv.org/pdf/2607.22186)**
 
 **Guanqun Zhao, Zijun Xie, Binbin Zheng, Enlei Gong, Jiafeng Lu, <u>Yehan Yang</u>, Aoqi Hu, Zeyu Chen**<br>
 
