@@ -45,7 +45,7 @@ We introduce a data-free hybrid sparse attention method that identifies retrieva
 
 **[Deconstructing Off-Policy Ratios: Entropy-Scaled Trust Regions for Asynchronous Reinforcement Learning](https://arxiv.org/pdf/2607.22186)**
 
-**Guanqun Zhao, Zijun Xie, Binbin Zheng, Enlei Gong, Jiafeng Lu, <u>Yehan Yang</u>, Aoqi Hu, Zeyu Chen**<br>
+**Guanqun Zhao, Zijun Xie, Binbin Zheng, <u>Yehan Yang</u>, Jiafeng Lu, Aoqi Hu, Enlei Gong, Zeyu Chen**<br>
 
 We introduce ESTR, an entropy-scaled trust region that stabilizes asynchronous LLM reinforcement learning by filtering low-entropy off-policy noise while preserving high-entropy exploration. ESTR achieves 37.34 avg@1 on BrowseComp-Plus, 95.69 avg@4 on multi-turn GSM8K, and 28.38 average pass@4 across AIME 2024–2026, matching synchronous GRPO while delivering a 2.6× training speedup.
 </div>
